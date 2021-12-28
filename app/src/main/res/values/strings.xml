@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">WeatherCast</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <!-- maps strings -->
+    <string name="normal_map">Normal Map</string>
+    <string name="hybrid_map">Hybrid Map</string>
+    <string name="satellite_map">Satellite Map</string>
+    <string name="terrain_map">Terrain Map</string>
+    <string name="lat_long_snippet">Lat: %1$.5f, Long: %2$.5f</string>
+    <string name="dropped_pin">Dropped Pin</string>
+    <string name="poi">poi</string>
+
+    <string name="set_lat">Lat:%1$s</string>
+    <string name="set_lng">Lng:%1$s</string>
+    <string name="set_temperature">%1$s\u2103</string>
+    <string name="set_max_temperature">Max: %1$s\u2103</string>
+    <string name="set_min_temperature">Min: %1$s\u2103</string>
+    <string name="set_clouds">Clouds: %1$s\%</string>
+    <string name="set_wind_speed">Wind Speed: %1$sm/s</string>
+    <string name="set_pressure">Pressure: %1$shPa</string>
+    <string name="set_humidity">Humidity: %1$s\%</string>
+    <string name="current_weather">Current Weather</string>
+
+
+    <string name="see_forecast"><![CDATA[See Forecast ->]]></string>
+</resources>
