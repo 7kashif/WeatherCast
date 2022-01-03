@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.kashif.weathercast.fragments.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_currentWeatherBottomSheetFragment"
+            app:destination="@id/currentWeatherBottomSheetFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/currentWeatherBottomSheetFragment"
+        android:name="com.kashif.weathercast.fragments.CurrentWeatherBottomSheetFragment"
+        android:label="CurrentWeatherBottomSheetFragment"
+        tools:layout="@layout/current_weather_bottom_sheet">
+        <argument
+            android:name="response"
+            app:argType="com.kashif.weathercast.models.currentWeather.CurrentWeatherResponse"/>
+        <action
+            android:id="@+id/action_currentWeatherBottomSheetFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </dialog>
+
+</navigation>

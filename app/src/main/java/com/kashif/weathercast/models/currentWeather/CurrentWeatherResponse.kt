@@ -1,5 +1,9 @@
 package com.kashif.weathercast.models.currentWeather
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class CurrentWeatherResponse(
     val base: String,
     val clouds: Clouds,
@@ -14,4 +18,4 @@ data class CurrentWeatherResponse(
     val visibility: Int,
     val weather: List<Weather>,
     val wind: Wind
-)
+):Parcelable

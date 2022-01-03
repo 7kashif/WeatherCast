@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/KHAN/Documents/Misc/WeatherCast/app/src/main/res/drawable/favorite_checkbox_button.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/KHAN/Documents/Misc/WeatherCast/app/src/main/res/drawable/home_border.xml" value="0.19444444444444445" />
+        <entry key="..\:/Users/KHAN/Documents/Misc/WeatherCast/app/src/main/res/drawable/home_checkbox_button.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/KHAN/Documents/Misc/WeatherCast/app/src/main/res/drawable/ic_home.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/KHAN/Documents/Misc/WeatherCast/app/src/main/res/drawable/ic_home_border.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/KHAN/Documents/Misc/WeatherCast/app/src/main/res/layout/activity_maps.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/KHAN/Documents/Misc/WeatherCast/app/src/main/res/layout/current_weather_bottom_sheet.xml" value="0.25" />
+        <entry key="..\:/Users/KHAN/Documents/Misc/WeatherCast/app/src/main/res/layout/home_fragment.xml" value="0.19846153846153847" />
         <entry key="..\:/Users/KHAN/Documents/Misc/WeatherCast/app/src/main/res/menu/maps_menu.xml" value="0.2015625" />
       </map>
     </option>

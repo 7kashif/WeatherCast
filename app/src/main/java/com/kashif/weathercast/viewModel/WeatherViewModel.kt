@@ -29,6 +29,7 @@ constructor(
 
     fun getCurrentWeather(latLng: LatLng) {
         CoroutineScope(Dispatchers.IO).launch {
+            _weatherResponse.postValue(Services.Loading)
             try {
                 val response = repo.getCurrentWeather(latLng)
                 _weatherResponse.postValue(Services.ResponseSuccess(response.body()!!))

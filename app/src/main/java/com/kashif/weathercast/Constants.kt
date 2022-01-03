@@ -5,4 +5,5 @@ object Constants {
     const val BASE_URL = "https://api.openweathermap.org/"
     const val END_URL_CURRENT_WEATHER = "data/2.5/weather"
     const val TAG = "WeatherViewModel"
+    const val perc = "%"
 }

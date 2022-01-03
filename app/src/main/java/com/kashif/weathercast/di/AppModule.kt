@@ -1,8 +1,11 @@
 package com.kashif.weathercast.di
 
+import android.app.Application
 import com.kashif.weathercast.Constants
 import com.kashif.weathercast.api.WeatherApiService
-import com.squareup.moshi.Moshi
+import com.kashif.weathercast.repository.FavoritePlacesRepository
+import com.kashif.weathercast.room.FavoritePlacesDao
+import com.kashif.weathercast.room.FavoritePlacesDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,5 +35,19 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(WeatherApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideDatabase(application: Application) = FavoritePlacesDatabase.getInstance(application)
+
+    @Provides
+    @Singleton
+    fun provideFavoritePlacesDao(database: FavoritePlacesDatabase): FavoritePlacesDao =
+        database.favoritePlaceDao
+
+    @Provides
+    @Singleton
+    fun provideFavoritePlacesRepo(dao: FavoritePlacesDao): FavoritePlacesRepository =
+        FavoritePlacesRepository(dao)
 
 }
