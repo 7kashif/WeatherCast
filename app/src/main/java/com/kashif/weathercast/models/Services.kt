@@ -1,10 +1,9 @@
 package com.kashif.weathercast.models
 
-import com.kashif.weathercast.models.currentWeather.CurrentWeatherResponse
+import com.kashif.weathercast.models.weatherOneCall.OneCallWeatherResponse
 
 sealed class Services {
-    object Loading: Services()
-    object Idle: Services()
-    data class ResponseSuccess(val response: CurrentWeatherResponse): Services()
-    data class ResponseError(val error: String): Services()
+    object Loading : Services()
+    data class OneCallResponseSuccess(val response: OneCallWeatherResponse) : Services()
+    data class ResponseError(val error: String) : Services()
 }

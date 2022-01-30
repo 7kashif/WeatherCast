@@ -1,9 +1,11 @@
 package com.kashif.weathercast.fragments
 
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -14,12 +16,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.kashif.weathercast.base.BaseFragment
 import com.kashif.weathercast.R
+import com.kashif.weathercast.Utils
+import com.kashif.weathercast.base.BaseFragment
 import com.kashif.weathercast.databinding.HomeFragmentBinding
 import com.kashif.weathercast.models.Services
+import com.kashif.weathercast.models.WeatherParcel
 import com.kashif.weathercast.viewModel.FavoritePlacesViewModel
 import com.kashif.weathercast.viewModel.WeatherViewModel
+import java.util.*
 
 
 class HomeFragment : BaseFragment(), OnMapReadyCallback {
@@ -61,25 +66,39 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback {
     private fun addObservers() {
         favoritePlacesViewModel.favoritePlacesList.observe(viewLifecycleOwner, {
             it.forEach { place ->
-                mMap.addMarker(
+                val marker = mMap.addMarker(
                     MarkerOptions().position(place.latLng)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.png_heart))
                 )
+
+                marker?.let { mark ->
+                    favoritePlacesViewModel.addMarkerToMarkerList(mark)
+                }
             }
+            favoritePlacesViewModel.checkAndMaintainMarkers(it)
         })
 
-        viewModel.weatherResponse.observe(viewLifecycleOwner, {
+        favoritePlacesViewModel.removeMarker.observe(viewLifecycleOwner, {
+            it.remove()
+        })
+
+        viewModel.oneCallWeather.observe(viewLifecycleOwner, {
             when (it) {
-                is Services.ResponseSuccess -> {
+                is Services.Loading -> {
+                    binding.cvLoading.isVisible = true
+                }
+                is Services.OneCallResponseSuccess -> {
                     binding.cvLoading.isVisible = false
-                    val bundle = Bundle().apply {
-                        putParcelable("response", it.response)
+                    Utils.getWeatherParcelBundle(requireContext(),it.response)?.let {bundle->
+                        findNavController().navigate(
+                            R.id.action_homeFragment_to_currentWeatherBottomSheetFragment,
+                            bundle
+                        )
                     }
-                    findNavController().navigate(
-                        R.id.action_homeFragment_to_currentWeatherBottomSheetFragment,
-                        bundle
-                    )
+                }
+                is Services.ResponseError -> {
+                    binding.cvLoading.isVisible = false
+                    Toast.makeText(activity,"An error occurred.",Toast.LENGTH_LONG).show()
                 }
                 else -> {}
             }
@@ -89,10 +108,15 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback {
     private fun setMapClickListeners(map: GoogleMap) {
         map.setOnMapLongClickListener { latLng ->
             map.addMarker(MarkerOptions().position(latLng))
+            viewModel.getWeatherWithOneCall(latLng)
         }
+
         map.setOnMarkerClickListener {
-            binding.cvLoading.isVisible = true
-            viewModel.getCurrentWeather(it.position)
+            if (favoritePlacesViewModel.isMarkerFavorite(it)) {
+                viewModel.getWeatherWithOneCall(LatLng(it.position.latitude,it.position.longitude))
+            } else {
+                it.remove()
+            }
             true
         }
     }

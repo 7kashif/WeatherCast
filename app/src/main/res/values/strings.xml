@@ -15,15 +15,25 @@
     <string name="set_city_name">%1$s</string>
     <string name="set_lat">Lat:%1$.6f</string>
     <string name="set_lng">Lng:%1$.6f</string>
+    <string name="set_lat_lng">%1$.6f , %2$.6f</string>
     <string name="set_temperature">%1$.2f\u2103</string>
     <string name="set_max_temperature">Max: %1$.2f\u2103</string>
     <string name="set_min_temperature">Min: %1$.2f\u2103</string>
-    <string name="set_pressure">Pressure: %1$dhPa</string>
-    <string name="set_wind_speed">Wind Speed: %1$.2fm/s</string>
-    <string name="set_clouds">Clouds: %1$d%2$s</string>
-    <string name="set_humidity">Humidity: %1$d%2$s</string>
+    <string name="set_pressure">Pressure %1$dhPa</string>
+    <string name="set_wind_speed">Wind %1$.2fm/s</string>
+    <string name="set_clouds">Clouds %1$d%2$s</string>
+    <string name="set_humidity">Humidity %1$d%2$s</string>
     <string name="current_weather">Current Weather</string>
+    <string name="set_visibility">Visibility %1$dm</string>
+    <string name="set_sunrise_sunset">%1$s - %2$s</string>
+    <string name="set_sunrise">Sunrise %1$s</string>
+    <string name="set_sunset">Sunset %1$s</string>
 
+    <string name="weather_icon_url">http://openweathermap.org/img/wn/%1$s@2x.png</string>
 
     <string name="see_forecast"><![CDATA[See Forecast ->]]></string>
+    <string name="feels_like">Feels like %1$s\u2103</string>
+    <string name="see_more_details"><u>See more details</u></string>
+    <string name="next_48_hours">Next 48 hours</string>
+    <string name="next_7_days">Next 7 days</string>
 </resources>

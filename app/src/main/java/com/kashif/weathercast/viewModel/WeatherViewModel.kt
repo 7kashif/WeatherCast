@@ -1,12 +1,9 @@
 package com.kashif.weathercast.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.LatLng
-import com.kashif.weathercast.Constants.TAG
-import com.kashif.weathercast.api.WeatherApiService
 import com.kashif.weathercast.models.Services
 import com.kashif.weathercast.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,23 +17,21 @@ import javax.inject.Inject
 class WeatherViewModel
 @Inject
 constructor(
-    weatherApiService: WeatherApiService
-): ViewModel(){
-    private var repo: WeatherRepository = WeatherRepository(weatherApiService)
-    private val _weatherResponse = MutableLiveData<Services>()
-    val weatherResponse: LiveData<Services> get() = _weatherResponse
+    private val repo: WeatherRepository
+) : ViewModel() {
+    private val _oneCallWeather = MutableLiveData<Services>()
+    val oneCallWeather: LiveData<Services> get() = _oneCallWeather
 
-
-    fun getCurrentWeather(latLng: LatLng) {
+    fun getWeatherWithOneCall(latLng: LatLng) {
         CoroutineScope(Dispatchers.IO).launch {
-            _weatherResponse.postValue(Services.Loading)
+            _oneCallWeather.postValue(Services.Loading)
             try {
-                val response = repo.getCurrentWeather(latLng)
-                _weatherResponse.postValue(Services.ResponseSuccess(response.body()!!))
+                val response = repo.getWeatherWithOneCall(latLng)
+                _oneCallWeather.postValue(Services.OneCallResponseSuccess(response.body()!!))
             } catch (e: HttpException) {
-                Log.e(TAG,e.message())
+                _oneCallWeather.postValue(Services.ResponseError(e.message()))
             } catch (e: Exception) {
-                Log.e(TAG,e.message!!)
+                _oneCallWeather.postValue(Services.ResponseError(e.message!!))
             }
         }
     }

@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kashif.weathercast.Constants
 import com.kashif.weathercast.R
+import com.kashif.weathercast.Utils
 import com.kashif.weathercast.databinding.CurrentWeatherBottomSheetBinding
 import com.kashif.weathercast.room.FavoritePlace
 import com.kashif.weathercast.viewModel.FavoritePlacesViewModel
@@ -24,7 +26,7 @@ class CurrentWeatherBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        setStyle(STYLE_NO_FRAME, R.style.CustomBottomSheetDialog)
+        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialog)
     }
 
     override fun onCreateView(
@@ -43,9 +45,25 @@ class CurrentWeatherBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun setUpViews() {
         val latLng = LatLng(
-            args.response.coord.lat,
-            args.response.coord.lon
+            args.response.response.lat,
+            args.response.response.lon
         )
+
+        Utils.loadWeatherIcons(
+            requireContext(),
+            args.response.response.current.weather[0].icon,
+            binding.weatherIcon
+        )
+
+        binding.btnSeeForecast.setOnClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("response", args.response)
+            }
+            findNavController().navigate(
+                R.id.action_currentWeatherBottomSheetFragment_to_forecastFragment,
+                bundle
+            )
+        }
 
         lifecycleScope.launch {
             if (favoritePlaceViewModel.getFavoritePlaceByLatLng(latLng) != null)

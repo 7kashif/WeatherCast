@@ -21,10 +21,25 @@
         tools:layout="@layout/current_weather_bottom_sheet">
         <argument
             android:name="response"
-            app:argType="com.kashif.weathercast.models.currentWeather.CurrentWeatherResponse"/>
+            app:argType="com.kashif.weathercast.models.WeatherParcel"/>
         <action
             android:id="@+id/action_currentWeatherBottomSheetFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_currentWeatherBottomSheetFragment_to_forecastFragment"
+            app:destination="@id/forecastFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/forecastFragment"
+        android:name="com.kashif.weathercast.fragments.ForecastFragment"
+        android:label="ForecastFragment"
+        tools:layout="@layout/forecast_fragment">
+        <action
+            android:id="@+id/action_forecastFragment_to_currentWeatherBottomSheetFragment"
+            app:destination="@id/currentWeatherBottomSheetFragment" />
+        <argument
+            android:name="response"
+            app:argType="com.kashif.weathercast.models.WeatherParcel"/>
+    </fragment>
 
 </navigation>

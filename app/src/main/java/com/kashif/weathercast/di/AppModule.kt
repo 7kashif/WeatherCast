@@ -4,6 +4,7 @@ import android.app.Application
 import com.kashif.weathercast.Constants
 import com.kashif.weathercast.api.WeatherApiService
 import com.kashif.weathercast.repository.FavoritePlacesRepository
+import com.kashif.weathercast.repository.WeatherRepository
 import com.kashif.weathercast.room.FavoritePlacesDao
 import com.kashif.weathercast.room.FavoritePlacesDatabase
 import dagger.Module
@@ -35,6 +36,11 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(WeatherApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideWeatherRepo(apiService: WeatherApiService): WeatherRepository =
+        WeatherRepository(apiService)
 
     @Provides
     @Singleton
