@@ -17,8 +17,8 @@
     <string name="set_lng">Lng:%1$.6f</string>
     <string name="set_lat_lng">%1$.6f , %2$.6f</string>
     <string name="set_temperature">%1$.2f\u2103</string>
-    <string name="set_max_temperature">Max: %1$.2f\u2103</string>
-    <string name="set_min_temperature">Min: %1$.2f\u2103</string>
+    <string name="max_temp">Max %1$.2f\u2103</string>
+    <string name="min_temp">Min %1$.2f\u2103</string>
     <string name="set_pressure">Pressure %1$dhPa</string>
     <string name="set_wind_speed">Wind %1$.2fm/s</string>
     <string name="set_clouds">Clouds %1$d%2$s</string>
@@ -29,7 +29,7 @@
     <string name="set_sunrise">Sunrise %1$s</string>
     <string name="set_sunset">Sunset %1$s</string>
 
-    <string name="weather_icon_url">http://openweathermap.org/img/wn/%1$s@2x.png</string>
+    <string name="weather_icon_url">http://openweathermap.org/img/wn/%1$s.png</string>
 
     <string name="see_forecast"><![CDATA[See Forecast ->]]></string>
     <string name="feels_like">Feels like %1$s\u2103</string>

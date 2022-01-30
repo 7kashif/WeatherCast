@@ -9,11 +9,15 @@ import androidx.navigation.fragment.navArgs
 import com.kashif.weathercast.Constants
 import com.kashif.weathercast.R
 import com.kashif.weathercast.Utils
+import com.kashif.weathercast.adapter.DailyAdapter
+import com.kashif.weathercast.adapter.HourlyAdapter
 import com.kashif.weathercast.databinding.ForecastFragmentBinding
 
 class ForecastFragment : Fragment() {
     private lateinit var binding: ForecastFragmentBinding
     private val args: ForecastFragmentArgs by navArgs()
+    private val hourlyAdapter = HourlyAdapter()
+    private val dailyAdapter = DailyAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,9 +42,12 @@ class ForecastFragment : Fragment() {
                 R.string.set_sunset,
                 Utils.formatTime(args.response.response.current.sunset)
             )
+            rvHourly.adapter = hourlyAdapter
+            rvDaily.adapter = dailyAdapter
+            hourlyAdapter.submitList(args.response.response.hourly)
+            dailyAdapter.submitList(args.response.response.daily)
 
             Utils.loadWeatherIcons(
-                requireContext(),
                 args.response.response.current.weather[0].icon,
                 weatherIcon
             )

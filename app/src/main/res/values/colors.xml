@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#16437C</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="cornfolowerblue">#54a6dc</color>
+    <color name="cornfolowerblue_dark">#1272AE</color>
 </resources>

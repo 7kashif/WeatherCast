@@ -14,18 +14,21 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/cornfolowerblue_dark">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:background="@color/cornfolowerblue_dark">
 
             <CheckBox
                 android:id="@+id/cbAddFavorite"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginEnd="8dp"
+                android:buttonTint="@color/white"
                 android:button="@drawable/favorite_checkbox_button"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -35,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
+                android:textColor="@color/white"
                 android:text="@{@string/set_lat_lng(response.response.lat,response.response.lon)}"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +50,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:textColor="@color/white"
                 android:text="@{response.address}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,22 +62,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textSize="38sp"
+                android:textSize="48sp"
+                android:textColor="@color/white"
                 android:text="@{@string/set_temperature(response.response.current.temp)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCityName"
                 tools:text="11\u2103" />
 
+            <TextView
+                android:id="@+id/tvMaxTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:text="@{@string/max_temp(response.response.daily[0].temp.max)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTemperature"
+                tools:text="Max 12\u2103"/>
+            <TextView
+                android:id="@+id/tvMinTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:text="@{@string/min_temp(response.response.daily[0].temp.min)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMaxTemp"
+                app:layout_constraintBottom_toBottomOf="@id/tvTemperature"
+                tools:text="Min 11\u2103"/>
+
             <ImageView
                 android:id="@+id/weatherIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
-                android:layout_marginStart="8dp"
-                app:layout_constraintTop_toTopOf="@id/tvTemperature"
-                app:layout_constraintBottom_toBottomOf="@id/tvTemperature"
-                app:layout_constraintStart_toEndOf="@id/tvTemperature"
-                tools:src="@drawable/rain"/>
+                android:scaleType="fitXY"
+                android:textColor="@color/white"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@id/tvTemperature"
+                app:layout_constraintTop_toBottomOf="@id/tvTemperature"/>
 
             <TextView
                 android:id="@+id/tvDescription"
@@ -80,8 +107,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="20sp"
+                android:textColor="@color/white"
                 android:text="@{response.response.current.weather[0].description}"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/weatherIcon"
                 app:layout_constraintTop_toBottomOf="@id/tvTemperature"
                 tools:text="Clear Sky"/>
 
@@ -90,6 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@id/tvSunset"
                 app:layout_constraintTop_toBottomOf="@id/tvDescription"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@id/tvSunrise"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvDescription"
@@ -108,9 +138,9 @@
             <View
                 android:id="@+id/line"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEB0B3B3"
+                android:background="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/tvSunrise"/>
 
             <TextView
@@ -119,6 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:text="@{@string/feels_like(response.response.current.feels_like)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line"
@@ -131,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:text="@{@string/set_wind_speed(response.response.current.wind_speed)}"
                 app:layout_constraintTop_toBottomOf="@id/line"
                 app:layout_constraintStart_toEndOf="@id/tvFeelsLike"
@@ -143,6 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:text="@{@string/set_pressure(response.response.current.pressure)}"
                 app:layout_constraintStart_toEndOf="@id/tvHumidity"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,6 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:text="@{@string/set_humidity(response.response.current.humidity,constant.perc)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tvPressure"
@@ -167,6 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:text="@{@string/set_clouds(response.response.current.clouds,constant.perc)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tvVisibility"
@@ -179,6 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:text="@{@string/set_visibility(response.response.current.visibility)}"
                 app:layout_constraintStart_toEndOf="@id/tvClouds"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -188,9 +224,9 @@
             <View
                 android:id="@+id/line2"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEB0B3B3"
+                android:background="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/tvClouds"/>
 
             <TextView
@@ -198,6 +234,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
                 android:text="@string/next_48_hours"
                 app:layout_constraintTop_toBottomOf="@id/line2"
                 app:layout_constraintStart_toStartOf="parent"
@@ -214,9 +252,9 @@
             <View
                 android:id="@+id/line3"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEB0B3B3"
+                android:background="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/rvHourly"/>
 
             <TextView
@@ -224,7 +262,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:layout_marginTop="8dp"
                 android:text="@string/next_7_days"
+                android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/line3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>

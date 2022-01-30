@@ -5,7 +5,7 @@ import android.location.Geocoder
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
-import com.bumptech.glide.Glide
+import coil.load
 import com.kashif.weathercast.models.WeatherParcel
 import com.kashif.weathercast.models.weatherOneCall.OneCallWeatherResponse
 import java.text.SimpleDateFormat
@@ -35,17 +35,20 @@ object Utils {
     }
 
     fun loadWeatherIcons(
-        context: Context,
         iconId: String,
         iv: ImageView
     ) {
-        Glide.with(context)
-            .load(context.getString(R.string.weather_icon_url, iconId))
-            .into(iv)
+        val imagePath = Constants.BASE_IMAGE_PATH+iconId+".png"
+        iv.load(imagePath)
     }
 
     fun formatTime(time: Int): String {
         val formatter = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        return formatter.format(Date(time*1000L))
+    }
+
+    fun formatDay(time: Int): String {
+        val formatter = SimpleDateFormat("d MMM", Locale.getDefault())
         return formatter.format(Date(time*1000L))
     }
 

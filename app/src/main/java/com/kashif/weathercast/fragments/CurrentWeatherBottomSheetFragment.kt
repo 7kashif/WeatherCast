@@ -40,6 +40,7 @@ class CurrentWeatherBottomSheetFragment : BottomSheetDialogFragment() {
         binding.constant = Constants
         setUpViews()
 
+
         return binding.root
     }
 
@@ -50,10 +51,11 @@ class CurrentWeatherBottomSheetFragment : BottomSheetDialogFragment() {
         )
 
         Utils.loadWeatherIcons(
-            requireContext(),
             args.response.response.current.weather[0].icon,
             binding.weatherIcon
         )
+
+
 
         binding.btnSeeForecast.setOnClickListener {
             val bundle = Bundle().apply {
