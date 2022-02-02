@@ -42,7 +42,7 @@ class HourlyAdapter: ListAdapter<Hourly, HourlyAdapter.HourlyViewHolder>(diffCal
             holder.itemView.apply {
                 tvTime.text = Utils.formatTime(item.dt)
                 tvDescription.text = item.weather[0].description
-                tvTemperature.text = "${item.temp}\u2103"
+                tvTemperature.text = "${item.temp.toInt()}\u2103"
                 Utils.loadWeatherIcons(item.weather[0].icon,ivIcon)
             }
         }

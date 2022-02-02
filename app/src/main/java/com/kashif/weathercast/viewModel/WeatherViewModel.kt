@@ -36,4 +36,8 @@ constructor(
         }
     }
 
+    fun idleService() {
+        _oneCallWeather.value = Services.Idle
+    }
+
 }

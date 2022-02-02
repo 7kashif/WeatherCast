@@ -15,9 +15,9 @@
         android:id="@+id/cvLoading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        map:cardCornerRadius="16dp"
         android:padding="16dp"
         android:visibility="gone"
+        android:backgroundTint="@color/cornfolowerblue_dark"
         map:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
                 android:id="@+id/progressbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminateTint="@color/teal_700"
+                android:indeterminateTint="@color/white"
                 map:layout_constraintTop_toTopOf="parent"
                 map:layout_constraintStart_toStartOf="parent"
                 map:layout_constraintEnd_toEndOf="parent"/>

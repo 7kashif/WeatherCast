@@ -40,12 +40,12 @@ class DailyAdapter: ListAdapter<Daily, DailyAdapter.DailyViewHolder>(diffUtil) {
 
         holder.binding.apply {
             holder.itemView.apply {
-                val max = item.temp.max
-                val min = item.temp.min
+                val max = item.temp.max.toInt()
+                val min = item.temp.min.toInt()
                 tvDay.text = Utils.formatDay(item.dt)
                 tvDescription.text = item.weather[0].description
                 tvMinMax.text = "$max\u2103/$min\u2103"
-                tvTemperature.text = "${item.temp.day}\u2103"
+                tvTemperature.text = "${item.temp.day.toInt()}\u2103"
                 Utils.loadWeatherIcons(item.weather[0].icon,ivIcon)
             }
         }

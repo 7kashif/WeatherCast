@@ -1,13 +1,13 @@
 package com.kashif.weathercast.fragments
 
-import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -21,16 +21,10 @@ import com.kashif.weathercast.Utils
 import com.kashif.weathercast.base.BaseFragment
 import com.kashif.weathercast.databinding.HomeFragmentBinding
 import com.kashif.weathercast.models.Services
-import com.kashif.weathercast.models.WeatherParcel
-import com.kashif.weathercast.viewModel.FavoritePlacesViewModel
-import com.kashif.weathercast.viewModel.WeatherViewModel
-import java.util.*
-
+import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment(), OnMapReadyCallback {
     private lateinit var binding: HomeFragmentBinding
-    private val viewModel: WeatherViewModel by activityViewModels()
-    private val favoritePlacesViewModel: FavoritePlacesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +32,7 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View {
         binding = HomeFragmentBinding.inflate(inflater)
+        addObservers()
         setHasOptionsMenu(true)
 
         return binding.root
@@ -47,7 +42,6 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager
             .findFragmentById(binding.map.id) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        addObservers()
     }
 
     override fun onMapReady(p0: GoogleMap) {
@@ -66,39 +60,33 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback {
     private fun addObservers() {
         favoritePlacesViewModel.favoritePlacesList.observe(viewLifecycleOwner, {
             it.forEach { place ->
-                val marker = mMap.addMarker(
+                mMap.addMarker(
                     MarkerOptions().position(place.latLng)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.png_heart))
                 )
-
-                marker?.let { mark ->
-                    favoritePlacesViewModel.addMarkerToMarkerList(mark)
-                }
             }
-            favoritePlacesViewModel.checkAndMaintainMarkers(it)
+            Log.e("favoritePlacesViewModel",it.size.toString())
         })
 
-        favoritePlacesViewModel.removeMarker.observe(viewLifecycleOwner, {
-            it.remove()
-        })
-
-        viewModel.oneCallWeather.observe(viewLifecycleOwner, {
+        weatherViewModel.oneCallWeather.observe(viewLifecycleOwner, {
             when (it) {
                 is Services.Loading -> {
                     binding.cvLoading.isVisible = true
                 }
                 is Services.OneCallResponseSuccess -> {
                     binding.cvLoading.isVisible = false
-                    Utils.getWeatherParcelBundle(requireContext(),it.response)?.let {bundle->
-                        findNavController().navigate(
-                            R.id.action_homeFragment_to_currentWeatherBottomSheetFragment,
-                            bundle
+                    sharedViewModel.currentlyDisplayedWeatherResponse =
+                        Utils.getWeatherParcel(requireContext(), it.response)
+                    mMap.clear()
+                    this.findNavController()
+                        .navigate(
+                            HomeFragmentDirections.actionHomeFragmentToForecastFragment()
                         )
-                    }
                 }
+
                 is Services.ResponseError -> {
                     binding.cvLoading.isVisible = false
-                    Toast.makeText(activity,"An error occurred.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "An error occurred.", Toast.LENGTH_LONG).show()
                 }
                 else -> {}
             }
@@ -107,18 +95,38 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun setMapClickListeners(map: GoogleMap) {
         map.setOnMapLongClickListener { latLng ->
-            map.addMarker(MarkerOptions().position(latLng))
-            viewModel.getWeatherWithOneCall(latLng)
+            map.addMarker(
+                MarkerOptions().position(latLng)
+            )?.let {
+                weatherViewModel.getWeatherWithOneCall(latLng)
+            }
         }
 
         map.setOnMarkerClickListener {
-            if (favoritePlacesViewModel.isMarkerFavorite(it)) {
-                viewModel.getWeatherWithOneCall(LatLng(it.position.latitude,it.position.longitude))
-            } else {
-                it.remove()
+            lifecycleScope.launch {
+                if (favoritePlacesViewModel.getFavoritePlaceByLatLng(
+                        LatLng(
+                            it.position.latitude,
+                            it.position.longitude
+                        )
+                    ) != null
+                ) {
+                    weatherViewModel.getWeatherWithOneCall(
+                        LatLng(
+                            it.position.latitude,
+                            it.position.longitude
+                        )
+                    )
+                } else
+                    it.remove()
             }
             true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        favoritePlacesViewModel.modifyEventFlag(false)
     }
 
 }

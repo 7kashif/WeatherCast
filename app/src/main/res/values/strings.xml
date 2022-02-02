@@ -16,9 +16,10 @@
     <string name="set_lat">Lat:%1$.6f</string>
     <string name="set_lng">Lng:%1$.6f</string>
     <string name="set_lat_lng">%1$.6f , %2$.6f</string>
-    <string name="set_temperature">%1$.2f\u2103</string>
-    <string name="max_temp">Max %1$.2f\u2103</string>
-    <string name="min_temp">Min %1$.2f\u2103</string>
+    <string name="set_temperature">%1$.1f\u2103</string>
+    <string name="max_temp">Max %1$.1f\u2103</string>
+    <string name="min_temp">Min %1$.1f\u2103</string>
+    <string name="max_min_temp">%1$.1f\u2103/%2$.1f\u2103</string>
     <string name="set_pressure">Pressure %1$dhPa</string>
     <string name="set_wind_speed">Wind %1$.2fm/s</string>
     <string name="set_clouds">Clouds %1$d%2$s</string>

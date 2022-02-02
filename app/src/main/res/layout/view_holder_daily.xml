@@ -24,8 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvDescription"
-        app:layout_constraintTop_toBottomOf="@id/tvDay"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+        tools:src="@drawable/rain"/>
 
     <TextView
         android:id="@+id/tvDescription"
@@ -36,7 +37,7 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDay"
-        app:layout_constraintStart_toEndOf="@id/ivIcon"
+        app:layout_constraintStart_toStartOf="parent"
         tools:text="Scattered clouds"/>
 
     <TextView
@@ -47,7 +48,7 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+        app:layout_constraintTop_toBottomOf="@id/ivIcon"
         tools:text="13\u2103"/>
 
     <TextView

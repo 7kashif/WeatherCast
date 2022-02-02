@@ -4,11 +4,18 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.android.gms.maps.GoogleMap
 import com.kashif.weathercast.R
+import com.kashif.weathercast.viewModel.FavoritePlacesViewModel
+import com.kashif.weathercast.viewModel.SharedViewModel
+import com.kashif.weathercast.viewModel.WeatherViewModel
 
-open class BaseFragment: Fragment() {
+open class BaseFragment : Fragment() {
     protected lateinit var mMap: GoogleMap
+    protected val weatherViewModel: WeatherViewModel by activityViewModels()
+    protected val favoritePlacesViewModel: FavoritePlacesViewModel by activityViewModels()
+    protected val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.maps_menu, menu)

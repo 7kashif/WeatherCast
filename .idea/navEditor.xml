@@ -13,12 +13,17 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-170" />
-                            <option name="y" value="1" />
+                            <option name="x" value="-113" />
+                            <option name="y" value="302" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_currentWeatherBottomSheetFragment_to_forecastFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_currentWeatherBottomSheetFragment_to_homeFragment">
                               <value>
                                 <LayoutPositions />
@@ -37,6 +42,15 @@
                             <option name="x" value="69" />
                             <option name="y" value="-8" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_forecastFragment_to_currentWeatherBottomSheetFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
