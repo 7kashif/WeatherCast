@@ -1,7 +1,5 @@
 package com.kashif.weathercast.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
@@ -20,26 +18,16 @@ constructor(
     private val repo: FavoritePlacesRepository
 ) : ViewModel() {
     val favoritePlacesList = repo.getAllFavoritePlaces()
-    private val _eventFlag = MutableLiveData<Boolean>()
-    val eventFlag: LiveData<Boolean> get() = _eventFlag
 
     fun addFavoritePlace(favoritePlace: FavoritePlace) {
         viewModelScope.launch(Dispatchers.IO) {
             repo.addFavoritePlace(favoritePlace)
-        }.invokeOnCompletion {
-            modifyEventFlag(true)
         }
-    }
-
-    fun modifyEventFlag(flag: Boolean) {
-        _eventFlag.postValue(flag)
     }
 
     fun deleteSingleFavoritePlace(latlng: LatLng) {
         viewModelScope.launch(Dispatchers.IO) {
             repo.deleteSingleFavoritePlace(latlng)
-        }.invokeOnCompletion {
-            modifyEventFlag(true)
         }
     }
 

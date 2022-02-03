@@ -67,11 +67,6 @@ class ForecastFragment : BaseFragment() {
                     binding.cbAddFavorite.isChecked = true
             }
 
-            favoritePlacesViewModel.eventFlag.observe(viewLifecycleOwner,{
-                if(it)
-                    findNavController().popBackStack()
-            })
-
             binding.cbAddFavorite.setOnCheckedChangeListener { button, isChecked ->
                 if (button.isPressed) {
                     if (isChecked) {

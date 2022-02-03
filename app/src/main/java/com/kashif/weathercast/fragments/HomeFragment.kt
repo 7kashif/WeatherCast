@@ -77,10 +77,9 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback {
                     binding.cvLoading.isVisible = false
                     sharedViewModel.currentlyDisplayedWeatherResponse =
                         Utils.getWeatherParcel(requireContext(), it.response)
-                    mMap.clear()
                     this.findNavController()
                         .navigate(
-                            HomeFragmentDirections.actionHomeFragmentToForecastFragment()
+                            HomeFragmentDirections.actionHomeFragmentToCurrentWeatherBottomSheetFragment()
                         )
                 }
 
@@ -122,11 +121,6 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback {
             }
             true
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        favoritePlacesViewModel.modifyEventFlag(false)
     }
 
 }
