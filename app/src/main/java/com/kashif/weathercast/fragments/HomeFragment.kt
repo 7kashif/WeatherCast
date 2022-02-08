@@ -65,7 +65,7 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback {
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.png_heart))
                 )
             }
-            Log.e("favoritePlacesViewModel",it.size.toString())
+            Log.e("favoritePlacesViewModel", it.size.toString())
         })
 
         weatherViewModel.oneCallWeather.observe(viewLifecycleOwner, {

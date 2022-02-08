@@ -23,11 +23,6 @@ object AppModule {
     @Singleton
     fun provideBaseUrl() = Constants.BASE_URL
 
-//    @Provides
-//    @Singleton
-//    fun provideMoshi(): Moshi =
-//        Moshi.Builder().build()
-
     @Provides
     @Singleton
     fun provideRetrofitInstance(baseUrl: String): WeatherApiService =
