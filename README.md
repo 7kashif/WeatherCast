@@ -1,7 +1,6 @@
 <h2 align="center">WeatherCast</h2>
-<h4 align="center">A weather forecasting application built using Google maps, OpenWeatherMap api, Kotlin Coroutines,
-    MVVM, Dagger Hilt and Room persistence. In which you can tap on any location on google maps and see current weather
-    at particular location and also the forecast for weather at that location.
+<h4 align="center">A weather forecasting application in which you can tap on any location on google maps and see current weather
+    at particular location and also the forecast for weather at that location. You can add locations to your favorite list for quick access next time.
 </h4>
 
 <p><img src="https://user-images.githubusercontent.com/59311205/155549838-d1c62af5-f70e-4699-909a-2c9776fe107a.png"
