@@ -6,5 +6,5 @@
 
 <img align="center"
     src="https://user-images.githubusercontent.com/59311205/155548216-42f0eca4-5a74-4b16-90db-d1954a913739.png"
-    alt="7kashif">
+    alt="7kashif" width="30%" height="50%">
 
