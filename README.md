@@ -12,3 +12,14 @@
         width="30%" height="50%">
 </p>
 
+<h4>Technologies Used</h4>
+<ul>
+    <li>Android Studio</li>
+    <li>Kotlin</li>
+    <li>MVVM</li>
+    <li>Google Maps</li>
+    <li>OpenWeatherMap API</li>
+    <li>Dagger Hilt</li>
+    <li>Room persistence</li>
+</ul>
+
