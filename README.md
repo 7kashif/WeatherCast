@@ -4,8 +4,7 @@
     at particular location and also the forecast for weather at that location.
 </h4>
 
-<p><img align="center"
-        src="https://user-images.githubusercontent.com/59311205/155548216-42f0eca4-5a74-4b16-90db-d1954a913739.png"
+<p><img src="https://user-images.githubusercontent.com/59311205/155549838-d1c62af5-f70e-4699-909a-2c9776fe107a.png"
         width="30%" height="50%"><img
         src="https://user-images.githubusercontent.com/59311205/155548931-0e3dd6cc-3040-44ed-91ea-810039f22fae.png"
         width="30%" height="50%"><img
